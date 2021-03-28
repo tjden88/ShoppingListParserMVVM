@@ -8,9 +8,12 @@ namespace ShoppingListParserMVVM.Infrastructure.Commands.Base
         private readonly Predicate<object> _CanExecute;
 
 
-        public Command(Action<object> execute) : this(execute, null) { }
+        public Command(Action execute, Func<bool> canExecute = null) : this(p => execute(),
+            canExecute is null ? null : p => canExecute())
+        {
+        }
 
-        public Command(Action<object> execute, Predicate<object> canExecute)
+        public Command(Action<object> execute, Predicate<object> canExecute = null)
         {
             _Execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _CanExecute = canExecute;

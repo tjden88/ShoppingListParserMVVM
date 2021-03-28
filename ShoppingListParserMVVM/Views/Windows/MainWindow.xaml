@@ -7,7 +7,11 @@
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         Title="{Binding Title}"
         Width="800" Height="450">
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <TextBox DockPanel.Dock="Top" Text="{Binding FileName}" MinWidth="200"/>
+        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Left" Margin="5" Command="{Binding GetDataCommand}">Получить данные</Button>
+        <DataGrid ItemsSource="{Binding DataCollection}">
+
+        </DataGrid>
+    </DockPanel>
 </Window>
