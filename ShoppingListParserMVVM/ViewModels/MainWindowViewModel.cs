@@ -10,6 +10,7 @@ namespace ShoppingListParserMVVM.ViewModels
 
         public MainWindowViewModel(IUserDialog UserDialog, IDataService DataService)
         {
+            Title = "Парсер списка покупок";
             _UserDialog = UserDialog;
             _DataService = DataService;
         }
