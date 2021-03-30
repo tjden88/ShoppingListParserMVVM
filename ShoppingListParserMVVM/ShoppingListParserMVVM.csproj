@@ -15,4 +15,8 @@
     <Folder Include="Resources\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\WPRControls\WPRControls\WPRControls.csproj" />
+  </ItemGroup>
+
 </Project>

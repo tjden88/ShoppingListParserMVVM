@@ -8,22 +8,22 @@ namespace ShoppingListParserMVVM.Infrastructure.Commands.Base
         private readonly Predicate<object> _CanExecute;
 
 
-        public Command(Action execute, Func<bool> canExecute = null) : this(p => execute(),
-            canExecute is null ? null : p => canExecute())
+        public Command(Action Execute, Func<bool> CanExecute = null) : this(P => Execute(),
+            CanExecute is null ? null : P => CanExecute())
         {
         }
 
-        public Command(Action<object> execute, Predicate<object> canExecute = null)
+        public Command(Action<object> Execute, Predicate<object> CanExecute = null)
         {
-            _Execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _CanExecute = canExecute;
+            _Execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
+            _CanExecute = CanExecute;
         }
 
         /// <summary>Возможность выполнения команды</summary>
-        protected override bool CanExecute(object p) => _CanExecute?.Invoke(p) ?? true;
+        protected override bool CanExecute(object P) => _CanExecute?.Invoke(P) ?? true;
 
         /// <summary>Выполнить команду</summary>
-        protected override void Execute(object p) => _Execute(p);
+        protected override void Execute(object P) => _Execute(P);
 
     }
 }

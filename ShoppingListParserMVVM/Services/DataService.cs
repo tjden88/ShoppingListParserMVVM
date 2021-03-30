@@ -11,7 +11,7 @@ using ShoppingListParserMVVM.Models;
 
 namespace ShoppingListParserMVVM.Services
 {
-    class DataService : IDataService
+    internal class DataService : IDataService
     {
         public IEnumerable<Element> GetElements(string FileName)
         {
@@ -22,7 +22,11 @@ namespace ShoppingListParserMVVM.Services
             {
                 Element element = new()
                 {
-                    Name = row["Наименование"].ToString()
+                    Name = row["Наименование"].ToString(),
+                    Price = (double)row["Цена"],
+                    Count= (double)row["Кол-во"],
+                    Order = row["Заказ"].ToString(),
+                    Сontractor = row["Поставщик"].ToString()
                 };
                 yield return element;
             }

@@ -9,28 +9,28 @@ namespace ShoppingListParserMVVM.Infrastructure.Commands.Base
         private readonly Predicate<object> _CanExecute;
 
 
-        public CommandAsync(Action execute, Func<bool> canExecute = null) : this(p => execute(),
-            canExecute is null ? null : p => canExecute())
+        public CommandAsync(Action Execute, Func<bool> CanExecute = null) : this(P => Execute(),
+            CanExecute is null ? null : P => CanExecute())
         {
         }
 
-        public CommandAsync(Action<object> execute, Predicate<object> canExecute = null)
+        public CommandAsync(Action<object> Execute, Predicate<object> CanExecute = null)
         {
-            _Execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _CanExecute = canExecute;
+            _Execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
+            _CanExecute = CanExecute;
         }
 
         /// <summary>Возможность выполнения команды</summary>
-        protected override bool CanExecute(object p) => _CanExecute?.Invoke(p) ?? true;
+        protected override bool CanExecute(object P) => _CanExecute?.Invoke(P) ?? true;
 
         /// <summary>Выполнить команду</summary>
-        protected override async void Execute(object parameter)
+        protected override async void Execute(object Parameter)
         {
-            if (!CanExecute(parameter)) return;
+            if (!CanExecute(Parameter)) return;
             try
             {
                 Executable = false;
-                await Task.Run(() => _Execute(parameter));
+                await Task.Run(() => _Execute(Parameter));
                 Executable = true;
             }
             catch
@@ -39,6 +39,5 @@ namespace ShoppingListParserMVVM.Infrastructure.Commands.Base
                 throw;
             }
         }
-
     }
 }

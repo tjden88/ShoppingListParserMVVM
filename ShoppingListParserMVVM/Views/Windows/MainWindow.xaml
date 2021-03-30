@@ -4,14 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:ShoppingListParserMVVM"
+        xmlns:ex="clr-namespace:WPRControls;assembly=WPRControls"
+        Style="{StaticResource ChromeWindow}"  ex:Extensions.TitleLeftMargin ="{Binding ElementName=TitleButtonsPanel, Path=ActualWidth}"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         Title="{Binding Title}"
         Width="800" Height="450">
-    <DockPanel>
-        <TextBox DockPanel.Dock="Top" Text="{Binding FileName}" MinWidth="200"/>
-        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Left" Margin="5" Command="{Binding GetDataCommand}">Получить данные</Button>
-        <DataGrid ItemsSource="{Binding DataCollection}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!-- Панель в заголовке для кнопок-->
+            <StackPanel Margin="3" x:Name="TitleButtonsPanel" Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto"/>
+        <!--Основной контент в 1 строке грида-->
+        <Grid Grid.Row="1">
+            <DockPanel Margin="5">
+                <TextBox DockPanel.Dock="Top" Text="{Binding FileName}" MinWidth="200"/>
+                <Button DockPanel.Dock="Bottom" HorizontalAlignment="Left" Margin="5" Command="{Binding GetDataCommand}">Получить данные</Button>
+                <DataGrid ItemsSource="{Binding DataCollection}" AutoGenerateColumns="True">
 
-        </DataGrid>
-    </DockPanel>
+                </DataGrid>
+            </DockPanel>
+        </Grid>
+    </Grid>
+
 </Window>

@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using ShoppingListParserMVVM.Infrastructure.Commands.Base;
 using ShoppingListParserMVVM.Models;
+using ShoppingListParserMVVM.Models.Test;
 using ShoppingListParserMVVM.Services.Interfaces;
 using ShoppingListParserMVVM.ViewModels.Base;
 
@@ -32,7 +33,8 @@ namespace ShoppingListParserMVVM.ViewModels
 
         #region FileName : string - Имя файла с данными
 
-        private string _FileName = @"D:\YandexDisk\БД Программа\Заказы\CurrentZakup.xml";
+        //private string _FileName = @"D:\YandexDisk\БД Программа\Заказы\CurrentZakup.xml";
+        private string _FileName = "CurrentZakup.xml";
 
         /// <summary>Имя файла с данными</summary>
         public string FileName
@@ -62,6 +64,13 @@ namespace ShoppingListParserMVVM.ViewModels
         {
             _dataService = dataService;
             Title = "Парсер списка покупок";
+            //OnGetDataCommandExecuted();
+            if (App.IsDesignTime)
+            {
+                DataCollection = new ObservableCollection<Element>(TestDataGenerator.GetTestElements(100));
+            }
+                
+
         }
     }
 }
